@@ -25,9 +25,17 @@
             }
 
             .flex-center {
-                align-items: center;
                 display: flex;
                 justify-content: center;
+            }
+
+            .flex-left {
+                display: flex;
+                justify-content: left;
+            }
+
+            .margin-top-5 {
+                margin-top: 5vh;
             }
 
             .position-ref {
@@ -62,39 +70,51 @@
                 margin-bottom: 30px;
             }
         </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css" />
+        
     </head>
     <body>
+        @if($errors->any())
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        @endif
+        @if(session('success'))
+            <h2>{{session('success')}}</h2>
+        @endif
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Módulo tarjetas de circulación
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://laravel.com/docs">Lista de citas</a>
+                    <a href="https://laracasts.com">Editar cita</a>
+                    <a href="https://laravel-news.com">Borrar cita</a>
+                </div>
+                <div class="margin-top-5">   
+                    @yield('new-appointment-form')
                 </div>
             </div>
         </div>
     </body>
+    <script src="/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script>
+        let startMinutes = @json($hora_inicio);
+        let endMinutes = @json($hora_fin);
+        $( document ).ready(function() {
+            $('input.datepicker').datepicker({
+                beforeShowDay: $.datepicker.noWeekends
+            })
+            $('input.timepicker').timepicker({
+                minHour: startMinutes/60,
+                maxHour: endMinutes/60,
+                interval: 15
+            })
+        });
+    </script>
 </html>
