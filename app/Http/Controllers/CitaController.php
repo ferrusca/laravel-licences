@@ -18,6 +18,12 @@ class CitaController extends Controller
   
   static $timezone = 'America/Mexico_City'; 
 
+  public function index() {
+    return view('citas', [
+      'citas' => Cita::with(['moduloAtencion', 'tramite'])->get()
+    ]);
+  }
+
   public function store(Request $request) {
     $appointment = (object) $request->validate([
       'curp' => ['required', 'size:18'],

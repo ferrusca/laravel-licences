@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('new-appointment-form')
+@section('content')
   <form action="{{url('cita')}}" method="POST" id="appointment">
     @csrf
     <label for="curp">CURP del ciudadano: </label>

@@ -20,6 +20,22 @@
                 margin: 0;
             }
 
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+
             .full-height {
                 height: 100vh;
             }
@@ -66,6 +82,10 @@
                 text-transform: uppercase;
             }
 
+            a {
+                text-decoration: none;
+            }
+
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -86,16 +106,17 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
-                    Módulo tarjetas de circulación
+                    <a href="nueva-cita"
+                    > Módulo tarjetas de circulación </a>
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Lista de citas</a>
-                    <a href="https://laracasts.com">Editar cita</a>
-                    <a href="https://laravel-news.com">Borrar cita</a>
+                    <a href="{{url('cita')}}">Lista de citas</a>
+                    <a href="{{url('editar-cita')}}">Editar cita</a>
+                    <a href="{{url('borrar-cita')}}">Borrar cita</a>
                 </div>
                 <div class="margin-top-5">   
-                    @yield('new-appointment-form')
+                    @yield('content')
                 </div>
             </div>
         </div>
@@ -104,8 +125,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script>
-        let startMinutes = @json($hora_inicio);
-        let endMinutes = @json($hora_fin);
+        let startMinutes = @json($hora_inicio ?? 0);
+        let endMinutes = @json($hora_fin ?? 0);
         $( document ).ready(function() {
             $('input.datepicker').datepicker({
                 beforeShowDay: $.datepicker.noWeekends
