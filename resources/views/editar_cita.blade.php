@@ -1,10 +1,11 @@
 @extends('app')
 
 @section('content')
-  <form action="{{url('cita')}}" method="POST" id="appointment">
+  <form action="{{url('cita', ['id' => $cita->id])}}" method="POST" id="appointment">
     @csrf
+    @method('put')
     <label for="curp">CURP del ciudadano: </label>
-    <input id="curp" type="text" name="curp">
+    <input id="curp" type="text" name="curp" value="{{$cita->curp}}">
     
     <label for="tramite">Tipo de Trámite</label>
     <select name="tramite_id" id="tramite-id" form="appointment">
@@ -28,7 +29,7 @@
       <input type="text" name="hora_cita" class="timepicker" />    
     </div>
     <button type="submit" class="margin-top-5">
-      CREAR CITA
+      EDITAR CITA
     </button>
   </form>
 @endsection

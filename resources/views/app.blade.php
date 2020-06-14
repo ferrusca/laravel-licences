@@ -111,9 +111,8 @@
                 </div>
 
                 <div class="links">
+                    <a href="{{url('nueva-cita')}}">Crear nueva cita</a>
                     <a href="{{url('cita')}}">Lista de citas</a>
-                    <a href="{{url('editar-cita')}}">Editar cita</a>
-                    <a href="{{url('borrar-cita')}}">Borrar cita</a>
                 </div>
                 <div class="margin-top-5">   
                     @yield('content')

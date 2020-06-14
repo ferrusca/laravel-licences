@@ -1,28 +1,31 @@
 @extends('app')
 
 @section('content')
-  <table id="appointments-table">
+  <table>
     <tr>
       <th>CURP</th>
       <th>Tipo de Tramite</th>
       <th>Módulo Atención</th>
       <th>Horario</th>
+      <th>Acciones</th>
     </tr>
+    @foreach ($citas as $cita)
+      <tr>
+        <td>{{$cita->curp}}</td>
+        <td>{{$cita->tramite->nombre}}</td>
+        <td>{{$cita->moduloAtencion->nombre}}</td>
+        <td>{{$cita->horario}}</td>
+        <td>
+          <form action="{{url('editar-cita', ['id' => $cita->id])}}" method="GET">
+            <button type="submit">Editar Cita</button>
+          </form>
+          <form action="{{ url('cita', ['id' => $cita->id]) }}" method="post">
+            @method('delete')
+            @csrf
+            <button type="submit">Borrar Cita</a>
+          </form>
+        </td>
+      </tr>
+    @endforeach
   </table>
-
-  <script>
-    let table = document.getElementById('appointments-table');
-    let citas = @json($citas);
-    citas.forEach((cita, index) => {
-      let row = table.insertRow(index+1)
-      let curp = row.insertCell(0)
-      let tipoTramite = row.insertCell(1)
-      let moduloAtencion = row.insertCell(2)
-      let horario = row.insertCell(3)
-      curp.innerHTML = cita.curp
-      tipoTramite.innerHTML = cita.tramite.nombre
-      moduloAtencion.innerHTML = cita.modulo_atencion.nombre
-      horario.innerHTML = cita.horario
-    })
-  </script>
 @endsection
