@@ -15,7 +15,7 @@ class CreateCitasTable extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('rfc');
+            $table->string('curp');
             $table->integer('modulo_atencion_id')->unsigned();
             $table->foreign('modulo_atencion_id')->references('id')->on('modulos_atencion');
             $table->timestamps();

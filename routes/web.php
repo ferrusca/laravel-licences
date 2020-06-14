@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::to('nueva-cita');
 });
+
+Route::get('nueva-cita', 'CitaController@newAppointment');
+Route::resource('cita', 'CitaController');
