@@ -3,8 +3,9 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class ModuloAtencion extends Model
 {
+    protected $table = 'modulos_atencion';
     protected $fillable = [
         'nombre', 'direccion',
     ];
